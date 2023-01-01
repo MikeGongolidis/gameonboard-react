@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-
+import { BackHomeButton } from "./BackHomeButton";
 import { GameButton } from "./GameButton";
 
 export function ResultAnnouncement({result, winner, player}){
@@ -29,9 +29,7 @@ export function ResultAnnouncement({result, winner, player}){
             <h4>
             {innerText}
             </h4>
-            <GameButton
-                innerText='Back to Main Menu'
-            />
+            <BackHomeButton/>
 
         </div>
     )

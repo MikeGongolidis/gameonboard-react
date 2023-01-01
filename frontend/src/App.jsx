@@ -36,7 +36,10 @@ function App() {
 
   return (
     <div className={style}>
+        <div className="transition ease-in-out delay-350 hover:shadow-2xl border p-6 rounded-lg bg-zinc-900">
         {body}
+        </div>
+        
     </div>
   );
 }

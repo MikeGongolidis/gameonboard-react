@@ -1,6 +1,7 @@
 import React,{useContext} from "react";
 import { WsContext } from './WsProvider.jsx';
 import { GameButton } from "./GameButton.jsx";
+import {BackHomeButton} from "./BackHomeButton"
 import { WaitingBox } from "./WaitingBox.jsx";
 import {inviteFriendEvent, findEnemyEvent, exitQueueEvent, destoryRoomEvent} from '../utils/websocket_events.js'
 
@@ -41,13 +42,7 @@ export function MainMenu({game}){
             />
             {body}
             <div className='col-span-full text-center'>Players Online: {connectionStatus.onlinePlayers}</div>
-            <GameButton 
-                onClick={ ()=> {
-                    // redirect to main menu;
-                    }
-                }
-                innerText='Back to Main Menu'
-            />
+            <BackHomeButton/>
     </div>
     )
 
