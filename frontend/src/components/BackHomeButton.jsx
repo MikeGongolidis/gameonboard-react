@@ -1,13 +1,25 @@
-import React from "react";
+import React,{useState} from "react";
 import classNames from "classnames"
 
 export function BackHomeButton(){
 
-    let style = classNames("m-2 rounded-lg p-2 bg-indigo-500 hover:bg-indigo-700 text-white text-lg")
+    const [clicked,setClicked] = useState(false)
+
+    let style = classNames("w-full rounded-lg py-2 bg-indigo-500 hover:bg-indigo-700 text-white text-lg hover:cursor-pointer",{
+        'animate-wiggle': clicked
+    })
+
 
     return (
-        <div className={style} onClick={()=> console.log('clicked')}>
-            <a href={'/'} className='text-white'>Back to Main Menu</a>
+        <div 
+            className={style} 
+            onClick={()=> {
+                setClicked(true)
+                window.location.href = "http://localhost:5173";
+
+            }}
+            onAnimationEnd={()=> setClicked(false)}>
+            Back to Main Menu
         </div>
     )
 }

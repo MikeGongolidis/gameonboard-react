@@ -11,11 +11,20 @@ export function GameCell({column, row, player, socket}){
 
     var btnClass = classNames(
         'w-28 h-28 rounded-full bg-slate-800 border-2 border-transparent transition-colors duration-700',{
-        'hover:border-sky-700': (btnVisible!='fire' && btnVisible!='water' && player === 2 ),
-        'hover:border-rose-700': (btnVisible!='fire' && btnVisible!='water' && player === 1 ),
-        'bg-fire-button bg-cover pointer-events-none': (btnVisible==='fire'),
-        'bg-water-button bg-cover pointer-events-none': (btnVisible==='water'),
+        'hover:bg-sky-700': (btnVisible!='fire' && btnVisible!='water' && player === 2 ),
+        'hover:bg-rose-700': (btnVisible!='fire' && btnVisible!='water' && player === 1 ),
+
     });
+
+    let imgClass = classNames(
+        "w-full h-full rounded-full transition-opacity delay-300 ease-in-out",{
+        "opacity-0 ": btnVisible!=='fire' && btnVisible!=='water',
+        'pointer-events-none opacity-1 content-fire': btnVisible==='fire' ,
+        'pointer-events-none opacity-1 content-water': btnVisible==='water',
+        }
+    )
+    
+
 
     //When cell is clicked, send the play move
     const sendMove = (e) => {
@@ -51,7 +60,11 @@ export function GameCell({column, row, player, socket}){
             row={row}
             className={btnClass}
             onClick={(e) => sendMove(e)}
-        >
+        >   
+        <img className={imgClass}
+            column={column}
+            row={row}  
+            ></img>
         </button>
     )
 

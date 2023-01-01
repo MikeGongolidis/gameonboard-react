@@ -10,7 +10,20 @@ module.exports = {
         'fire-button': "url('/assets/fire_circle2.png')",
         'water-button': "url('/assets/water_circle2.png')",
       },
+      content: {
+        'fire': "url('/assets/fire_circle2.png')",
+        'water': "url('/assets/water_circle2.png')"
+      },
     },
+    keyframes: {
+      wiggle: {
+        "0%, 100%": { transform: "rotate(-1deg)" },
+        "50%": { transform: "rotate(1deg)" }
+      }
+    },
+    animation: {
+      wiggle: "wiggle 200ms ease-in-out"
+    }
   },
   plugins: [],
 }
