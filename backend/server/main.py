@@ -4,6 +4,7 @@ import asyncio
 import websockets
 import logging
 import signal
+import time
 
 from lobby import LobbyRoom
 from communication import MessageModel, MessageEnum
@@ -29,9 +30,13 @@ async def handler(player):
         while True:
             try:
                 # Waiting for 600 seconds to close connection due to inactivity
+                logging.info("calling recv", exc_info=True)
                 event = await asyncio.wait_for(player.recv(),timeout=600.0)
+                logging.info("calling recv", exc_info=True)
+               
             except asyncio.exceptions.TimeoutError as e:
-                print("Connection timed out!")
+                logging.error("Connection timed out!", exc_info=True)
+
                 await player.send(json.dumps({"mtype":MessageEnum.CONNECTION_CLOSED.value}))
                 break
 
@@ -42,7 +47,6 @@ async def handler(player):
                 # If message is invalid, let the client know
                 await player.send(json.dumps({"mtype":MessageEnum.INVALID_MESSAGE.value}))
                 continue
-
             if message.mtype == MessageEnum.INVITE.value:
 
                 assert message.game_type
@@ -118,7 +122,10 @@ async def handler(player):
                     websockets.broadcast(LOBBY.rooms[room_id], draw_event)
     finally:
         # Unregister player if connection closes
+        print(f'removing {player}')
         CONNECTIONS.remove(player)
+        #time.sleep(0.5)
+        #print(f'sending less players to {CONNECTIONS}')
         websockets.broadcast(CONNECTIONS, json.dumps({"mtype":MessageEnum.NUM_CLIENTS.value,"num_clients": len(CONNECTIONS)}))
         #TODO: handle exit if game is active
 

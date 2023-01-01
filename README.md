@@ -2,6 +2,7 @@
 
 
 Main tasks:
+1. Home redirection
 1. Notify user on connection closed and give the option to reconnect
 2. Add dark/white option
 3. Add sound notification option
