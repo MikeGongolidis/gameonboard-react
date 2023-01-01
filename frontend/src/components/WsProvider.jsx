@@ -6,10 +6,10 @@ export const WsContext = createContext(null);
 
 export function WsProvider({children}){
 
-    const [connectionStatus, socket] = useWebSocketConnection();
+    const [connectionStatus, socket, dispatch] = useWebSocketConnection();
 
     return(
-        <WsContext.Provider value={{connectionStatus: connectionStatus, socket : socket}}>
+        <WsContext.Provider value={{connectionStatus: connectionStatus, socket : socket, dispatch: dispatch}}>
             {children}
         </WsContext.Provider>
     )

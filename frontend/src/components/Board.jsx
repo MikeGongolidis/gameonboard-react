@@ -1,26 +1,47 @@
-import React,{useContext} from "react";
+import React,{ useState, useContext} from "react";
 import { range } from 'lodash';
 import classNames from "classnames";
 
 import { WsContext } from "./WsProvider";
 import { GameCell } from "./GameCell";
 import { ResultAnnouncement } from "./ResultAnnouncement";
+import { useEffect } from "react";
 
 export function Board({game}){
     console.log("rendering Board")
     const {connectionStatus, socket} = useContext(WsContext);
+    const [gameExited,setGameExited] = useState(false);
+
 
     let gridRows =  range(0, (game === 1) ? 3:6).reverse();
     let gridColumns =  range(0, (game === 1) ? 3:7); 
     let gameTitle = (game === 1) ? 'Tic-Tac-Toe': 'Connect-4';
 
+    //When move is received, draw the move on the board
+    useEffect( () => {
+
+        //The server notifed us that the game exited from some unknown reason
+        const gameExitedFromExternalEvent = (event) => {
+            const message = JSON.parse(event.data);
+            if(message.mtype === 16){
+                console.log(JSON.stringify(message))
+                setGameExited(true);
+            }
+        }
+
+        socket.addEventListener('message',gameExitedFromExternalEvent);
+        return () => socket.removeEventListener('message',gameExitedFromExternalEvent);
+
+    },[]);
+
     let resultAnnouncement;
-    if(connectionStatus.result){
+    if(connectionStatus.result || gameExited){
         console.log("announcing results")
         resultAnnouncement = <ResultAnnouncement 
                                 result={connectionStatus.result}
                                 winner={connectionStatus.winner} 
                                 player={connectionStatus.currentPlayer} 
+                                gameExited={gameExited}
                             />;
     }
 

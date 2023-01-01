@@ -1,4 +1,4 @@
-import { useEffect, useRef, useReducer } from "react";
+import { useEffect, useRef, useReducer, useCallback } from "react";
 import {wsReducer} from '../components/wsReducer';
 import {joinRoomEvent} from '../utils/websocket_events.js';
 
@@ -7,7 +7,7 @@ export function useWebSocketConnection(){
 
     const [connectionStatus, dispatch] = useReducer(wsReducer, initialState);
     const ws = useRef(null);
-
+    
     function onOpen(){
         // Get the parameters from the URL.
         console.log("ws connection open");
@@ -68,7 +68,7 @@ export function useWebSocketConnection(){
         };
 
     },[])
-    return [connectionStatus, ws.current];
+    return [connectionStatus, ws.current, dispatch];
 }
 
 

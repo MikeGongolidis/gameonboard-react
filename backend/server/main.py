@@ -122,12 +122,19 @@ async def handler(player):
                     websockets.broadcast(LOBBY.rooms[room_id], draw_event)
     finally:
         # Unregister player if connection closes
-        print(f'removing {player}')
+        print(f'error with {player}')
+        try:
+            player2 = LOBBY.find_enemy(player)
+            await player2.send(json.dumps({"mtype":MessageEnum.GAME_CLOSED.value}))
+            LOBBY.cleanup_game(player, player2)
+        except Exception:
+            print(f'player was not part of a runnning game')
+            pass
+
         CONNECTIONS.remove(player)
-        #time.sleep(0.5)
+        time.sleep(0.1)
         #print(f'sending less players to {CONNECTIONS}')
         websockets.broadcast(CONNECTIONS, json.dumps({"mtype":MessageEnum.NUM_CLIENTS.value,"num_clients": len(CONNECTIONS)}))
-        #TODO: handle exit if game is active
 
 
 

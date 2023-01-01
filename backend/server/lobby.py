@@ -98,7 +98,7 @@ class LobbyRoom():
         room_id = self.player_to_room_id[player]
         #Get the second player
         players = self.rooms[room_id]
-        print(f"{player} is leaving, we need to notify {list(players.difference(set({player})))[0]}")
+        print(f"we are looking for the opponent of {player}, which is  {list(players.difference(set({player})))[0]}")
         return list(players.difference(set({player})))[0]
 
     def cleanup_game(self,player1,player2):

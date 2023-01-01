@@ -35,6 +35,7 @@ export function wsReducer(connectionStatus, action) {
       }
     }
     case 6: // Play move (handled in GameCell)
+    case 16: // Enemy disconnected (handled in ResultsAnnouncement)
     case 8: { // Invalid move (do nothing)
       return connectionStatus
     }
@@ -44,6 +45,13 @@ export function wsReducer(connectionStatus, action) {
         ...connectionStatus,
         result: action.type,
         winner: action.payload.player || null
+      }
+    }
+    case 'wait-cancelled':{
+      return {
+        ...connectionStatus,
+        gameStatus: null,
+        roomId: null
       }
     }
     default: {
