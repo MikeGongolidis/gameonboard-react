@@ -30,9 +30,9 @@ async def handler(player):
         while True:
             try:
                 # Waiting for 600 seconds to close connection due to inactivity
-                logging.info("calling recv", exc_info=True)
+                logger.info("before recv", exc_info=True)
                 event = await asyncio.wait_for(player.recv(),timeout=600.0)
-                logging.info("calling recv", exc_info=True)
+                logger.info("after recv", exc_info=True)
                
             except asyncio.exceptions.TimeoutError as e:
                 logging.error("Connection timed out!", exc_info=True)
@@ -64,8 +64,8 @@ async def handler(player):
 
                 players =  LOBBY.add_player2_in_private_room_and_start_game(player, message.room_id)
 
-                for player, code in players: 
-                    await player.send(json.dumps({"mtype":MessageEnum.START_GAME.value,"player": code}))
+                for pl, code in players: 
+                    await pl.send(json.dumps({"mtype":MessageEnum.START_GAME.value,"player": code}))
 
             elif message.mtype == MessageEnum.FIND.value:
 

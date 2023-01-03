@@ -19,10 +19,15 @@ module.exports = {
       wiggle: {
         "0%, 100%": { transform: "rotate(-1deg)" },
         "50%": { transform: "rotate(1deg)" }
+      },
+      spin: {
+        "from": {transform: "rotate(0deg)"},
+        "to": {transform: "rotate(360deg)"}
       }
     },
     animation: {
-      wiggle: "wiggle 200ms ease-in-out"
+      wiggle: "wiggle 200ms ease-in-out",
+      spin: "spin 1s ease-in-out infinite;"
     }
   },
   plugins: [],
