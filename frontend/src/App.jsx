@@ -10,7 +10,8 @@ import ErrorPage from './components/ErrorPage';
 import { GameSelection } from './components/GameSelection';
 import { TicTacToe } from './routes/TicTacToe';
 import { Connect4 } from './routes/Connect4';
-
+import {NavBar} from './components/NavBar';
+import { Footer } from './components/Footer';
 
 const router = createBrowserRouter([
     {
@@ -36,12 +37,12 @@ function App() {
 
     return (
         <div className={`${darkMode ? 'dark':'light'}` }>
-            <div className='bg-indigo-300 dark:bg-[#242424] font-sans'>
-            <nav>
-                <button onClick={() => setDarkMode(!darkMode) }>Dark Mode</button>
-            </nav>
-            <RouterProvider router={router} />
-            <footer className=' absolute bottom-0 w-full bg-white dark:bg-black text-black dark:text-white'> This is the footer</footer>
+            <div className='bg-indigo-200 dark:bg-[#242424] transition-colors duration-500	font-sans'>
+            <NavBar darkMode={darkMode} setDarkMode={setDarkMode}/>
+            <div className="flex h-screen justify-center items-center">
+                <RouterProvider router={router} />
+            </div>
+            <Footer/>
             </div>
 
         </div>

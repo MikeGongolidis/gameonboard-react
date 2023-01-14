@@ -17,7 +17,7 @@ export function WaitingBox({roomId, game}){
             defaultValue={`${window.origin}/${gamepath}?mtype=3&room_id=${roomId}&game_type=${game}`}  
             className={linkStyles}/>
             <button 
-                className='p-1 border border-gray-500 rounded-lg bg-gray-700 dark:text-white hover:bg-gray-600'
+                className='p-1 border rounded-lg bg-indigo-500 hover:bg-indigo-700 dark:text-white '
                 onClick={()=> navigator.clipboard.writeText(`${window.origin}/${gamepath}?mtype=3&room_id=${roomId}&game_type=${game}`)}
             >
                 Copy

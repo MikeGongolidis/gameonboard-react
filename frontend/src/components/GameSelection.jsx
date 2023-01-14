@@ -6,11 +6,10 @@ import classNames from 'classnames';
 export function GameSelection(){
 
 
-    let Linkstyle = classNames("m-2 rounded-lg px-6 py-2 bg-indigo-500 hover:bg-indigo-700 text-lg text-white hover:text-black hover:font-semibold")
+    let Linkstyle = classNames("m-2 rounded-lg px-6 py-2 bg-indigo-500 hover:bg-indigo-700 text-lg text-white hover:text-black")
 
     return(
-        <div className="flex h-screen justify-center items-center">
-            <div className="transition ease-in-out delay-350 hover:shadow-2xl border p-6 rounded-lg bg-zinc-900">
+            <div className="transition ease-in-out duration-500 hover:shadow-2xl border p-6 rounded-lg bg-indigo-300 hover:bg-indigo-400 hover:dark:bg-zinc-700 dark:bg-zinc-900 dark:text-white">
                 <h1 className='p-2'>Game Onboard </h1>
                 <div className='flex justify-center'>
                     <Link 
@@ -25,6 +24,5 @@ export function GameSelection(){
                     </Link>
                 </div>
             </div> 
-        </div>
     )
 }

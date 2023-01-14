@@ -12,7 +12,7 @@ export function MainMenu({game}){
     const {connectionStatus, socket} = useContext(WsContext);
 
     const containerStyle = classNames("",{
-        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2 gap-y-2.5 justify-center items-center border p-6 rounded-lg bg-zinc-900 hover:shadow-2xl" : connectionStatus.gameStatus !== 'playing',
+        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2 gap-y-2.5 justify-center items-center border p-6 rounded-lg bg-indigo-300 hover:bg-indigo-400 hover:dark:bg-zinc-700 dark:bg-zinc-900 dark:text-white hover:shadow-2xl transition ease-in-out duration-500" : connectionStatus.gameStatus !== 'playing',
         "hidden": connectionStatus.gameStatus === 'playing'
     })
 
