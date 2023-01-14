@@ -8,7 +8,6 @@ import { ResultAnnouncement } from "./ResultAnnouncement";
 import { useEffect } from "react";
 
 export function Board({game}){
-    console.log("rendering Board")
     const {connectionStatus, socket} = useContext(WsContext);
     const [gameExited,setGameExited] = useState(false);
 
@@ -17,7 +16,6 @@ export function Board({game}){
     let gridColumns =  range(0, (game === 1) ? 3:7); 
     let gameTitle = (game === 1) ? 'Tic-Tac-Toe': 'Connect-4';
 
-    //When move is received, draw the move on the board
     useEffect( () => {
 
         //The server notifed us that the game exited from some unknown reason
@@ -53,7 +51,7 @@ export function Board({game}){
 
     //styles
     var containerStyle = classNames(
-        'flex flex-col rounded justify-center'
+        'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col rounded justify-center'
     );
 
     return (

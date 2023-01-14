@@ -1,14 +1,20 @@
 import React,{useContext} from "react";
+import classNames from "classnames";
 import { WsContext } from './WsProvider.jsx';
 import { GameButton } from "./GameButton.jsx";
 import {BackHomeButton} from "./BackHomeButton"
 import { WaitingBox } from "./WaitingBox.jsx";
-import {inviteFriendEvent, findEnemyEvent, exitQueueEvent, destoryRoomEvent} from '../utils/websocket_events.js'
+import {inviteFriendEvent, findEnemyEvent} from '../utils/websocket_events.js'
 
 
 export function MainMenu({game}){
 
     const {connectionStatus, socket} = useContext(WsContext);
+
+    const containerStyle = classNames("",{
+        "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid grid-cols-2 gap-y-2.5 justify-center items-center border p-6 rounded-lg bg-zinc-900 hover:shadow-2xl" : connectionStatus.gameStatus !== 'playing',
+        "hidden": connectionStatus.gameStatus === 'playing'
+    })
 
     const sendAction = (actionType) => {
         console.log('Sending find to game server');
@@ -36,7 +42,9 @@ export function MainMenu({game}){
     }
 
     return(
-        <div className="grid grid-cols-2 gap-y-2.5">
+        <div className={containerStyle}>
+            <div className='col-span-full text-center' ><h2>{game===1 ? "Tic-Tac-Toe":"Connect 4"}</h2></div>
+
             <GameButton 
                 onClick={() => sendAction('invite')}
                 pointerEvents={(connectionStatus.gameStatus === 'waiting')}

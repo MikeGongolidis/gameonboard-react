@@ -3,10 +3,21 @@ import {wsReducer} from '../components/wsReducer';
 import {joinRoomEvent} from '../utils/websocket_events.js';
 
 
+// const URL = 'ws://52.59.191.206:8765'
+// const URLocal = 'ws://localhost:8080'
+
 export function useWebSocketConnection(){
 
     const [connectionStatus, dispatch] = useReducer(wsReducer, initialState);
     const ws = useRef(null);
+
+    const getUrl = () => {
+        if(window.location.hostname === 'localhost'){
+            return 'ws://localhost:8080'
+        }else{
+            return 'ws://52.59.191.206:8765'
+        }
+    }
     
     function onOpen(){
         // Get the parameters from the URL.
@@ -55,8 +66,8 @@ export function useWebSocketConnection(){
 
         if(ws.current !== null) return;
         console.log('trying localhost')
-        const wsUri = 'ws://localhost:8080';
-        ws.current = new WebSocket(wsUri);
+        //const wsUri = 'ws://localhost:8080';
+        ws.current = new WebSocket(getUrl());
 
         ws.current.onopen = () => onOpen();
         ws.current.onmessage = (e) => onMessage(e.data);

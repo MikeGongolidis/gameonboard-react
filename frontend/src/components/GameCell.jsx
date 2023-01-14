@@ -17,7 +17,7 @@ export function GameCell({column, row, player, socket}){
     });
 
     let imgClass = classNames(
-        "w-full h-full rounded-full transition-opacity delay-300 ease-in-out",{
+        "w-full h-full rounded-full transition-opacity",{
         "opacity-0 ": btnVisible!=='fire' && btnVisible!=='water',
         'pointer-events-none opacity-1 content-fire': btnVisible==='fire' ,
         'pointer-events-none opacity-1 content-water': btnVisible==='water',
@@ -48,8 +48,8 @@ export function GameCell({column, row, player, socket}){
                 setbtnVisible(inner)
             }
         }
-
         socket.addEventListener('message',drawMove);
+        
         return () => socket.removeEventListener('message',drawMove);
 
     },[]);

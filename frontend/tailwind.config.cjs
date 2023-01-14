@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode:"class",
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -11,8 +12,8 @@ module.exports = {
         'water-button': "url('/assets/water_circle2.png')",
       },
       content: {
-        'fire': "url('/assets/fire_circle2.png')",
-        'water': "url('/assets/water_circle2.png')"
+        'fire': "url('/assets/rsz_1fire_circle2.png')",
+        'water': "url('/assets/rsz_water_circle2.png')"
       },
     },
     keyframes: {
