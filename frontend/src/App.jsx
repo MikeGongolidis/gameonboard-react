@@ -33,11 +33,11 @@ const router = createBrowserRouter([
 
 function App() {
 
-    const [darkMode,setDarkMode] = useState(false)
+    const [darkMode,setDarkMode] = useState(true)
 
     return (
         <div className={`${darkMode ? 'dark':'light'}` }>
-            <div className='bg-indigo-200 dark:bg-[#242424] transition-colors duration-500	font-sans'>
+            <div className='bg-indigo-200 dark:bg-[#242424] transition-colors duration-500	font-sans w-full h-full'>
             <NavBar darkMode={darkMode} setDarkMode={setDarkMode}/>
             <div className="flex h-screen justify-center items-center">
                 <RouterProvider router={router} />

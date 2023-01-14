@@ -10,7 +10,7 @@ export function GameCell({column, row, player, socket}){
     const [btnVisible, setbtnVisible] = useState('empty');
 
     var btnClass = classNames(
-        'w-28 h-28 rounded-full bg-slate-800 border-2 border-transparent transition-colors duration-700',{
+        'w-full h-full rounded-full bg-slate-800 border-2 border-transparent transition-colors duration-700',{
         'hover:bg-sky-700': (btnVisible!='fire' && btnVisible!='water' && player === 2 ),
         'hover:bg-rose-700': (btnVisible!='fire' && btnVisible!='water' && player === 1 ),
 

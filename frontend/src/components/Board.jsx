@@ -45,8 +45,8 @@ export function Board({game}){
 
     var boardStyle = classNames(
         'grid gap-1',{
-        'grid-cols-7 grid-rows-6': (game === 2),
-        'grid-cols-3 grid-rows-3': (game === 1),
+        'grid-cols-7 grid-rows-6 w-[440px] h-[380px] md:w-[720px] md:h-[600px]': (game === 2),
+        'grid-cols-3 grid-rows-3 w-[420px] h-[420px] md:w-[512px] md:h-[512px]': (game === 1),
         'pointer-events-none':connectionStatus.result || gameExited
     });
 
