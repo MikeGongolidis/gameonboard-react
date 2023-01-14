@@ -1,47 +1,51 @@
-import React, { useState } from 'react';
-import classNames from 'classnames';
 
-import { GameSelection } from './components/GameSelection.jsx';
-import { Lobby } from './components/Lobby.jsx'
-import { WsProvider } from './components/WsProvider';
-import { useEffect } from 'react';
+import React, {useState} from 'react';
+import {
+    createBrowserRouter,
+    RouterProvider,
+  } from "react-router-dom";
 
+import './index.css'
+import ErrorPage from './components/ErrorPage';
+import { GameSelection } from './components/GameSelection';
+import { TicTacToe } from './routes/TicTacToe';
+import { Connect4 } from './routes/Connect4';
+
+
+const router = createBrowserRouter([
+    {
+        path:'/',
+        element: <GameSelection/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path:'/tictactoe',
+        element: <TicTacToe/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path:'/connect4',
+        element: <Connect4/>,
+        errorElement: <ErrorPage/>,
+    }
+])
 
 function App() {
 
-    const [game,setGame] = useState(null);
+    const [darkMode,setDarkMode] = useState(false)
 
+    return (
+        <div className={`${darkMode ? 'dark':'light'}` }>
+            <div className='bg-indigo-300 dark:bg-[#242424] font-sans'>
+            <nav>
+                <button onClick={() => setDarkMode(!darkMode) }>Dark Mode</button>
+            </nav>
+            <RouterProvider router={router} />
+            <footer className=' absolute bottom-0 w-full bg-white dark:bg-black text-black dark:text-white'> This is the footer</footer>
+            </div>
 
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        if (params.has("room_id") && params.has("game_type")) {
-            // Second player joins an existing game.
-            setGame(parseInt(params.get("game_type")))
-        }
-    },[])
-
-    let style = classNames("flex h-screen justify-center items-center",{})
-
-
-    let body;
-    if(game === 1 || game === 2){
-        body = (
-            <WsProvider>
-                <Lobby game={game}/>
-            </WsProvider>
-        )
-    }else{
-        body = <GameSelection setGame={setGame}/>;
-    }
-
-  return (
-    <div className={style}>
-        <div className="transition ease-in-out delay-350 hover:shadow-2xl border p-6 rounded-lg bg-zinc-900">
-        {body}
         </div>
-        
-    </div>
-  );
+    )        
 }
 
-export default App;
+export default App
