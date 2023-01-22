@@ -5,7 +5,7 @@ export function GameButton({onClick, pointerEvents, innerText}){
 
     const [clicked,setClicked] = useState(false)
 
-    let style = classNames("m-2 rounded-lg px-6 py-2 bg-indigo-500 hover:bg-indigo-700 text-lg ",{
+    let style = classNames("m-1 min-w-[130px] rounded-lg  py-1 px-2 bg-indigo-500 hover:bg-indigo-700 text-sm md:text-lg ",{
         'pointer-events-none':pointerEvents,
         'animate-wiggle': clicked
     })

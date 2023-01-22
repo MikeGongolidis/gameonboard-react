@@ -8,7 +8,6 @@ import { ResultAnnouncement } from "./ResultAnnouncement";
 import { useEffect } from "react";
 
 export function Board({game}){
-    console.log("rendering Board")
     const {connectionStatus, socket} = useContext(WsContext);
     const [gameExited,setGameExited] = useState(false);
 
@@ -17,13 +16,12 @@ export function Board({game}){
     let gridColumns =  range(0, (game === 1) ? 3:7); 
     let gameTitle = (game === 1) ? 'Tic-Tac-Toe': 'Connect-4';
 
-    //When move is received, draw the move on the board
     useEffect( () => {
 
         //The server notifed us that the game exited from some unknown reason
         const gameExitedFromExternalEvent = (event) => {
             const message = JSON.parse(event.data);
-            if(message.mtype === 16){
+            if(message.mtype === 16 ){
                 console.log(JSON.stringify(message))
                 setGameExited(true);
             }
@@ -47,13 +45,14 @@ export function Board({game}){
 
     var boardStyle = classNames(
         'grid gap-1',{
-        'grid-cols-7 grid-rows-6': (game === 2),
-        'grid-cols-3 grid-rows-3': (game === 1),
+        'grid-cols-7 grid-rows-6 w-[440px] h-[380px] md:w-[720px] md:h-[600px]': (game === 2),
+        'grid-cols-3 grid-rows-3 w-[420px] h-[420px] md:w-[512px] md:h-[512px]': (game === 1),
+        'pointer-events-none':connectionStatus.result || gameExited
     });
 
     //styles
     var containerStyle = classNames(
-        'flex flex-col rounded justify-center'
+        'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col rounded justify-center dark:text-white'
     );
 
     return (
