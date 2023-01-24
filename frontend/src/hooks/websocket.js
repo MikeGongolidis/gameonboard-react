@@ -15,7 +15,7 @@ export function useWebSocketConnection(){
         if(window.location.hostname === 'localhost'){
             return 'ws://localhost:8080'
         }else{
-            return 'ws://52.59.191.206:8765'
+            return 'ws://52.59.191.206:8765/ws'
         }
     }
     
