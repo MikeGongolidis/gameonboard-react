@@ -39,7 +39,7 @@ function App() {
     return (
         <div className={`${darkMode ? 'dark':'light'}` }>
             <Canvas></Canvas>
-            <div className='	font-sans w-full h-full'>
+            <div className='font-sans w-full h-full'>
             <NavBar darkMode={darkMode} setDarkMode={setDarkMode}/>
             <div className="flex h-screen justify-center items-center">
                 <RouterProvider router={router} />
