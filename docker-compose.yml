@@ -7,23 +7,15 @@ services:
         build: 
             context: ./backend
             dockerfile: Dockerfile   
-    frontend:
-        restart: always
-        build:
-            context: ./frontend
-            dockerfile: Dockerfile
-        image: frontend
 
     ngproxy:
-        image: frontend
         build:
-            context: ./nginx
-            dockerfile: Dockerfile
+            context: ./
+            dockerfile: nginx/Dockerfile
         ports: 
             - 80:80
         restart: always
         depends_on:
             - wsserver
-            - frontend
         volumes:
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
