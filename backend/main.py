@@ -75,8 +75,8 @@ async def handler(player):
                 if players is None:
                     await player.send(json.dumps({"mtype":MessageEnum.WAIT.value}))
                 else:
-                    for player,code in players: 
-                        await player.send(json.dumps({"mtype":MessageEnum.START_GAME.value,"player": code}))
+                    for pl,code in players: 
+                        await pl.send(json.dumps({"mtype":MessageEnum.START_GAME.value,"player": code}))
 
             elif message.mtype == MessageEnum.EXIT_QUEUE.value:
 

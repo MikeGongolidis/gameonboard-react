@@ -45,16 +45,16 @@ export function MainMenu({game}){
         <div className={containerStyle}>
             <div className='col-span-full text-center' ><h2>{game===1 ? "Tic-Tac-Toe":"Connect 4"}</h2></div>
             <div className='col-span-full text-center'>
-            <GameButton 
-                onClick={() => sendAction('invite')}
-                pointerEvents={(connectionStatus.gameStatus === 'waiting')}
-                innerText='Invite a Friend'
-            />
-            <GameButton 
-                onClick={() => sendAction('find')} 
-                pointerEvents={connectionStatus.gameStatus === 'waiting'}
-                innerText='Find game'
-            />
+                <GameButton 
+                    onClick={() => sendAction('invite')}
+                    pointerEvents={(connectionStatus.gameStatus === 'waiting')}
+                    innerText='Invite a Friend'
+                />
+                <GameButton 
+                    onClick={() => sendAction('find')} 
+                    pointerEvents={connectionStatus.gameStatus === 'waiting'}
+                    innerText='Find game'
+                />
             </div>
 
 
